@@ -4,8 +4,8 @@ Game = {};
 // var w = tile_size*12;
 // var h = tile_size*10;
 
-var w = 800;
-var h = 420;
+var w = 780;
+var h = 480;
 var sound = 1;
 var score = 0;
 
@@ -16,7 +16,7 @@ Game.Boot = function (game) { };
 
 Game.Boot.prototype = {
 	preload: function () {
-		game.stage.backgroundColor = '#a9a9a9';
+		game.stage.backgroundColor = '#c3eae5';
 		game.load.image('loading', 'images/loading.png');
 		game.load.image('loading2', 'images/loading2.png');
 	},
@@ -38,14 +38,18 @@ Game.Load.prototype = {
 		preloading.x -= preloading.width/2;
 		game.load.setPreloadSprite(preloading);
 
- 		game.load.tilemap('map1', 'levels/map.json', null, Phaser.Tilemap.TILED_JSON);
-    	game.load.image('tiles', 'images/basictiles.png');
+ 		// game.load.tilemap('map1', 'levels/map.json', null, Phaser.Tilemap.TILED_JSON);
+		// game.load.image('tiles', 'images/basictiles.png');
+		
+ 		game.load.tilemap('map1', 'levels/starttown.json', null, Phaser.Tilemap.TILED_JSON);
+		game.load.image('tiles', 'images/testtile32.png');
+		
     	game.load.image('menu', 'images/menu.png');
     	game.load.image('dead', 'images/dead.png');
 		game.load.spritesheet('sound', 'images/sound.png', 28, 22);
 
-		game.load.spritesheet('player', 'images/saea01_2.png', 32*2, 32*2);
-		game.load.spritesheet('player02', 'images/saea02_2.png', 32*2, 32*2);
+		game.load.spritesheet('player', 'images/saea01.png', 32*2, 32*2);
+		game.load.spritesheet('player02', 'images/saea02.png', 32*2, 32*2);
 		game.load.spritesheet('happaly', 'images/happaly.png', 32, 32);
 		game.load.image('enemy', 'images/enemy.png');
 		//game.load.image('bullet', 'images/bullet2.png');
@@ -58,6 +62,8 @@ Game.Load.prototype = {
 		game.load.audio('heart', 'sounds/heart.wav');
 		game.load.audio('dead', 'sounds/dead.wav');
 
+		game.load.image('p_hanbok', 'images/HappySaea_Hanbok.png');
+		game.load.image('p_pink', 'images/HappySaea_pink.png');
 	},
 	create: function () {
 		game.state.start('Menu');

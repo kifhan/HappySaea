@@ -1,3 +1,5 @@
+var tsize = 32;
+
 var followers = [];
 
 Game.Play = function (game) { };
@@ -15,7 +17,7 @@ Game.Play.prototype = {
 
         this.load_map();
 
-		this.player = this.game.add.sprite(190*32, 11*32, 'player');
+		this.player = this.game.add.sprite(180*tsize, 27*tsize, 'player');
 		this.player.anchor.setTo(0.5, 0.5);
 		this.player.direction = 2;
 		this.player.animations.add('down', [1, 0, 2, 0], 6, true);
@@ -23,7 +25,9 @@ Game.Play.prototype = {
 		this.player.animations.add('right', [7, 6, 8, 6], 6, true);
 		this.player.animations.add('left', [10, 9, 11, 9], 6, true);
 		this.player.alive = true;
-		game.physics.arcade.enable(this.player);
+		game.physics.enable(this.player);
+
+		this.map.createLayer('tile4');
 
 		this.history = [];
 
@@ -43,6 +47,7 @@ Game.Play.prototype = {
 
 		this.dead = this.game.add.sprite(0, 0, 'dead');
 		this.dead.alpha = 0;
+
 	},
 
 	update: function() {
@@ -220,15 +225,19 @@ Game.Play.prototype = {
 	},
 
 	load_map: function() {
-		this.game.world.setBounds(0,0,200*32, 50*32);
+		this.game.world.setBounds(0,0,200*tsize, 50*tsize);
 
 	    this.map = game.add.tilemap('map1');
 	    this.map.addTilesetImage('tiles');
-	    this.layer = this.map.createLayer('tiles');
-		this.map.setCollisionBetween(1, 6);
-	    this.map.setCollisionBetween(30, 38);		
+	    // this.layer = this.map.createLayer('tiles');
+	    this.layer = this.map.createLayer('tile1');
+		// this.map.setCollisionBetween(1, 6);
+	    // this.map.setCollisionBetween(30, 38);		
 	    this.layer.resizeWorld();
 
+	    this.map.createLayer('tile2');
+	    this.map.createLayer('tile3');
+		
 		this.enemies = game.add.group();
 		this.keys = game.add.group();
 		this.doors = game.add.group();

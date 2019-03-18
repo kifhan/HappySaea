@@ -7,9 +7,12 @@ Game.Menu.prototype = {
 
 		var logo = game.add.sprite(w/2, -150, 'menu');
 		logo.anchor.setTo(0.5, 0.5);
-		game.add.tween(logo).to({ y: h/2-20 }, 1000, Phaser.Easing.Bounce.Out).start();
+		game.add.tween(logo).to({ y: 120 }, 1000, Phaser.Easing.Bounce.Out).start();
 
-		var label = game.add.text(w/2, h-60, 'press the UP arrow key to start', { font: '16px Arial', fill: '#fff' });
+		var saeasp = game.add.sprite(w/2, 245, 'p_pink');
+		saeasp.anchor.setTo(0.5);
+
+		var label = game.add.text(w/2, h-60, 'press the UP arrow key to start', { font: '16px Arial', fill: '#363636' });
 		label.anchor.setTo(0.5, 0.5);
 		label.alpha = 0;
 		game.add.tween(label).delay(500).to({ alpha: 1}, 500).start();
@@ -25,7 +28,7 @@ Game.Menu.prototype = {
 
 	update: function() {
 		if (this.cursor.up.isDown)
-			this.game.state.start('Play');		
+			this.game.state.start('Brief');
 	},
 
 	// toggle_sound: function() {
