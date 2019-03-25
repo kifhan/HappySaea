@@ -6,7 +6,7 @@ Game = {};
 
 var w = 780;
 var h = 480;
-var sound = 1;
+var sound = true;
 var score = 0;
 
 function rand(num){ return Math.floor(Math.random() * num) };
@@ -16,10 +16,10 @@ Game.Boot = function (game) { };
 
 Game.Boot.prototype = {
 	preload: function () {
-		game.stage.backgroundColor = '#c3eae5';
+		game.stage.backgroundColor = '#fff';
 		game.load.image('loading', 'images/loading.png');
 		game.load.image('loading2', 'images/loading2.png');
-	},
+			},
 	create: function() {
 		this.game.state.start('Load');
 	}
@@ -37,6 +37,8 @@ Game.Load.prototype = {
 		preloading = game.add.sprite(w/2, h/2+19, 'loading');
 		preloading.x -= preloading.width/2;
 		game.load.setPreloadSprite(preloading);
+
+		game.load.audio('puff', 'sounds/hap_puff.wav');
 
  		// game.load.tilemap('map1', 'levels/map.json', null, Phaser.Tilemap.TILED_JSON);
 		// game.load.image('tiles', 'images/basictiles.png');
@@ -62,8 +64,15 @@ Game.Load.prototype = {
 		game.load.audio('heart', 'sounds/heart.wav');
 		game.load.audio('dead', 'sounds/dead.wav');
 
-		game.load.image('p_hanbok', 'images/HappySaea_Hanbok.png');
-		game.load.image('p_pink', 'images/HappySaea_pink.png');
+		game.load.image('hapsae_hanbok', 'images/HappySaea_Hanbok.png');
+		game.load.image('hapsae_pink', 'images/HappySaea_pink.png');
+
+		game.load.image('city_world', 'images/pixelcity_world.png');
+
+		game.load.spritesheet('hapsae_walk', 'images/HappySaea_walk.png', 80, 128);
+
+    	game.load.image('hapsae_logo', 'images/hapsae_logo.png');
+
 	},
 	create: function () {
 		game.state.start('Menu');

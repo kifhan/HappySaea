@@ -26,6 +26,7 @@ Game.Play.prototype = {
 		this.player.animations.add('left', [10, 9, 11, 9], 6, true);
 		this.player.alive = true;
 		game.physics.enable(this.player);
+		this.player.body.setSize(30, 30, 16, 36);
 
 		this.map.createLayer('tile4');
 
@@ -47,7 +48,6 @@ Game.Play.prototype = {
 
 		this.dead = this.game.add.sprite(0, 0, 'dead');
 		this.dead.alpha = 0;
-
 	},
 
 	update: function() {
@@ -119,6 +119,22 @@ Game.Play.prototype = {
 			new Follower(this.game, this.player.x, this.player.y, followers.length ? followers[followers.length - 1] : this.player)
 		)
 		followers.push(follower);
+
+		function got_follower() {
+			this.dialogue.destroy();
+		}
+
+		if(this.dialogue) {
+			this.dialogue.destroy();
+			this.dialogue = null;
+		}
+		this.dialogue = new Dialogue(this.game);
+		this.dialogue.init({
+			gameWidth: w,
+			gameHeight: h,
+			callback: got_follower.bind(this)
+		})
+		this.dialogue.setText('"해! 피! 새! 아!  사! 랑! 해! 요!"  새로운 팬이 생겼습니다.', true);
 	},
 
 	// open_door: function(id) {
@@ -231,9 +247,12 @@ Game.Play.prototype = {
 	    this.map.addTilesetImage('tiles');
 	    // this.layer = this.map.createLayer('tiles');
 	    this.layer = this.map.createLayer('tile1');
-		// this.map.setCollisionBetween(1, 6);
+		this.map.setCollisionBetween(14, 16);
 	    // this.map.setCollisionBetween(30, 38);		
 	    this.layer.resizeWorld();
+
+		this.map.enableDebug = true
+		console.log(this.map.objects)
 
 	    this.map.createLayer('tile2');
 	    this.map.createLayer('tile3');
@@ -245,10 +264,10 @@ Game.Play.prototype = {
 		this.walls = game.add.group();
 
  	    // this.map.createFromObjects('objects', 16, 'enemy', 0, true, false, this.enemies);
-	    this.map.createFromObjects('objects', 32, 'heart', 0, true, false, this.hearts);
+	    this.map.createFromObjects('objects', 370, 'heart', 0, true, false, this.hearts);
 	    // this.map.createFromObjects('objects', 25, 'door', 0, true, false, this.doors);
 	    // this.map.createFromObjects('objects', 4, 'wall', 0, true, false, this.walls);
-	    this.map.createFromObjects('objects', 37, 'key', 0, true, false, this.keys);
+	    this.map.createFromObjects('objects', 369, 'key', 0, true, false, this.keys);
 
 		this.keys.forEach(function(d) {
 			game.physics.arcade.enable(d);
